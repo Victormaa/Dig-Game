@@ -31,8 +31,19 @@ public class WinState : State<Test_ball>
         _owner.WinCtrl();
 
         Test_Manager.Instance.WinUI.SetActive(true);
+
         Test_Manager.Instance.state4.isOn = true;
+
+        Test_Manager.RocketStatus = RocketAction.Winning;
+
+        Test_Manager.Instance.SoundEffect();
+
         Debug.Log("We are the champion my friends!!!! We'll keep on fighting till the end!!!");
+
+        Cursor.lockState = CursorLockMode.None;
+
+        Cursor.visible = true;
+
     }
 
     public override void ExitState(Test_ball _owner)

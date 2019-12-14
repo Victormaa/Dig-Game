@@ -12,15 +12,16 @@ public class Test_Gravity : MonoBehaviour
     public float mass;
 
     // Used to alter (unatuarally) the coorelation between the proximity of the objects to the severity of the attraction.  Tweak to make orbits easier to achieve or more intersting.
-    public int proximityModifier = 195;
+    public int proximityModifier;
+
+    public int originalG;
 
     public int maxModifier = 595;
 
     public GameObject Circle;
 
-    public float test_adjustForRadius;
-
-    private bool setRadiusGiz = false;
+    [SerializeField]
+    private float test_adjustForRadius;
 
     bool SettingbeeffectedDone = false;
 
@@ -35,16 +36,26 @@ public class Test_Gravity : MonoBehaviour
     [HideInInspector]
     public bool IsAbleSlowDown = false;
 
+    public SlowDown CurPlanet;
 
+    private ParticleSystem particle;
+
+    public float particleSpeed = 0.6f;
 
     // Start is called before the first frame update
     void Start()
     {
         Gaffectedobjects = new List<GameObject>();
 
+        particle = this.gameObject.transform.Find("PE_The circle").GetComponent<ParticleSystem>();
+
+        var gravityR = particle.shape;
+
+        gravityR.radius = soiRadius - 0.1f;
+
         mass = mass * 1000; // Mass ^ 5 in order to allow the relative mass input to be more readable
 
-        
+        originalG = maxModifier - proximityModifier;
     }
 
     public void OnDrawGizmos()
@@ -56,11 +67,8 @@ public class Test_Gravity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!setRadiusGiz)
-        {
-            Circle.gameObject.transform.localScale = new Vector3(soiRadius / (test_adjustForRadius * this.transform.localScale.x / 2), soiRadius / (test_adjustForRadius * this.transform.localScale.x / 2), 0);
-            setRadiusGiz = true;
-        }
+        //用来设定引力虚线的 test_adjustForRadius 这个值是调整值
+        Circle.gameObject.transform.localScale = new Vector3(soiRadius / (test_adjustForRadius * this.transform.localScale.x / 2), soiRadius / (test_adjustForRadius * this.transform.localScale.x / 2), 0);
 
         proximatemperary.text = proximityModifier.ToString();
 
@@ -72,13 +80,21 @@ public class Test_Gravity : MonoBehaviour
         {
             Canvastem.gameObject.SetActive(false);
         }
-            
+        var mainparticle = particle.main;
+
+        mainparticle.simulationSpeed = (1 - (float)this.proximityModifier / maxModifier) * particleSpeed;
+
+
 
     }
 
     private void FixedUpdate()
     {
-        GravityApply();
+        // when it broke the gravity thing temperory stop;
+        if(!Test_Manager.GameIsPaused)
+            if (IsAbleSlowDown)
+                if(!Test_Manager.IsRocketCrushed)
+                    GravityApply();
     }
 
     private void GravityApply()
@@ -128,12 +144,14 @@ public class Test_Gravity : MonoBehaviour
         }
     }
 
-    #region Adjust Gravity Input
+    #region Adjust Gravity Input 12/08 this one should be eliminated cause the input way was changed
     void GravityAdjust()
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            Test_Manager.Instance.FlyingUI.SetActive(true);
+            //Test_Manager.Instance.FlyingUI.SetActive(true);
+
+            var curplanet = CurPlanet.CurrentPlanet.GetComponent<Test_Gravity>();
 
             var controller = Test_Manager.Instance.FlyingUI.GetComponent<Slider>();
 
@@ -148,26 +166,29 @@ public class Test_Gravity : MonoBehaviour
             timeMana.TimeControl();
 
             if (!Canvastem.activeSelf)
-                Canvastem.transform.Find("Slider").GetComponent<Slider>().value = 50.0f;
+            {
+                Canvastem.transform.Find("Slider").GetComponent<Slider>().value = curplanet.originalG;
+                controller.value = curplanet.maxModifier - curplanet.originalG;
                 Canvastem.gameObject.SetActive(true);
-
+            }
 
             proximityModifier = maxModifier - (int)sliderval;
             //proximityModifier = proximityModifier + (int)Input.mouseScrollDelta.magnitude;
-
         }
 
+        /*
         if (Input.GetKeyUp(KeyCode.Space))
         {
             timeMana.CancelTimeControl();
-            Test_Manager.Instance.FlyingUI.SetActive(false);
+            //Test_Manager.Instance.FlyingUI.SetActive(false);
             Canvastem.SetActive(false);
         }
+        */
     }
 
     #endregion
 
-    #region State3
+    #region State3 colliding gameover;
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
@@ -175,7 +196,35 @@ public class Test_Gravity : MonoBehaviour
         if (hitobject.tag == "Player")
         {
             hitobject.GetComponent<Test_ball>().Crushing();
+            // for music test 
         }
     }
     #endregion
+
+    public void GravityMouse(float adjust)
+    {
+        var curplanet = CurPlanet.CurrentPlanet.GetComponent<Test_Gravity>();
+
+        var controller = Test_Manager.Instance.FlyingUI.GetComponent<Slider>();
+
+        var sliderval = Canvastem.transform.Find("Slider").GetComponent<Slider>().value;
+
+        controller.maxValue = Canvastem.transform.Find("Slider").GetComponent<Slider>().maxValue;
+
+        controller.minValue = Canvastem.transform.Find("Slider").GetComponent<Slider>().minValue;
+
+        controller.value =  adjust;
+
+        Canvastem.transform.Find("Slider").GetComponent<Slider>().value = controller.value;
+
+        if (!Canvastem.activeSelf)
+        {
+            //to set planet gravity to original
+            Canvastem.transform.Find("Slider").GetComponent<Slider>().value = curplanet.originalG;
+            controller.value = curplanet.maxModifier - curplanet.originalG;
+            Canvastem.gameObject.SetActive(true);
+        }
+
+        proximityModifier = maxModifier - (int)sliderval;
+    }
 }

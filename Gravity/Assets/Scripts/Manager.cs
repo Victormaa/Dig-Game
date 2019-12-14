@@ -12,7 +12,9 @@ public class Manager : MonoBehaviour
     public GameObject GravityButton;
     public GameObject ProjectileButton;
 
-    
+    public GameObject pauseUI;
+    //private bool isPause = false;
+    //private bool isRunning = true;
 
     // Start is called before the first frame update
     void Start()

@@ -3,7 +3,26 @@ guid: 01372b59c718aac4788d8031e62332a2
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - state1: {instanceID: 0}
+  - state2: {instanceID: 0}
+  - state3: {instanceID: 0}
+  - state4: {instanceID: 0}
+  - DirTest: {instanceID: 0}
+  - adjustvalue: {instanceID: 0}
+  - adjustVector: {instanceID: 0}
+  - Player: {instanceID: 0}
+  - FlyingUI: {instanceID: 0}
+  - CrushUI: {instanceID: 0}
+  - WinUI: {instanceID: 0}
+  - PrepareUI: {instanceID: 0}
+  - PrepareAngle: {instanceID: 0}
+  - Currentlevel: {instanceID: 0}
+  - upArrow: {instanceID: 0}
+  - downArrow: {instanceID: 0}
+  - normalArrow: {instanceID: 0}
+  - pauseUI: {fileID: 9120453926459840818, guid: d66bfc50325ed3448b0e831e2009c4c7,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

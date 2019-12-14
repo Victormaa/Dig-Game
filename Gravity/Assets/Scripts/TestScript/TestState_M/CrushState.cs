@@ -28,12 +28,26 @@ public class CrushState : State<Test_ball>
 
     public override void EnterState(Test_ball _owner)
     {
+        Test_Manager.IsRocketCrushed = true;
+
+        Test_Manager.RocketStatus = RocketAction.Crushing;
+
+        Test_Manager.Instance.SoundEffect();
 
         Test_Manager.Instance.state3.isOn = true;
+
         _owner.ModifyCrushCtrl();
+
+
         Test_Manager.Instance.CrushUI.SetActive(true);
+
         Debug.Log("Crushing!!!! now is time to retry! Go back to the preparestate.");
 
+        Test_Manager.Instance.DirTest.isOn = false;
+
+        Cursor.lockState = CursorLockMode.None;
+
+        Cursor.visible = true;
     }
 
     public override void ExitState(Test_ball _owner)

@@ -10,6 +10,6 @@ It was made by me and my four great classmates - Jin, Tony, TL, Jiaqiang.
 <p align = "left">
 <img src = "/images/Begin.gif" width = "400">
 </p>
-<p align = "right">
+<p align = "left">
 <img src = "/images/Crashed.gif" width = "400">
 </p>

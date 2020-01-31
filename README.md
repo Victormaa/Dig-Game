@@ -8,8 +8,8 @@ It was made by me and my four great classmates - Jin, Tony, TL, Jiaqiang.
 
 #### Gameplay Screen
 <p align = "left">
-<img src = "/images/Begin.gif" width = "400">
+<img src = "/images/Begin.gif" width = "350">
 </p>
 <p align = "left">
-<img src = "/images/Crashed.gif" width = "400">
+<img src = "/images/Crashed.gif" width = "350">
 </p>

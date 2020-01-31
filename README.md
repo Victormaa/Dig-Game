@@ -8,8 +8,21 @@ It was made by me and my four great classmates - Jin, Tony, TL, Jiaqiang.
 
 #### Gameplay Screen
 <p align = "left">
-<img src = "/images/Begin.gif" width = "350">
+<img src = "/images/Begin.gif" width = "400">
 </p>
+
 <p align = "left">
-<img src = "/images/Crashed.gif" width = "350">
+<img src = "/images/Scene1.gif" width = "400">
+</p>
+
+<p align = "left">
+<img src = "/images/Crashed.gif" width = "400">
+</p>
+
+<p align = "left">
+<img src = "/images/Blackhole.gif" width = "400">
+</p>
+
+<p align = "left">
+<img src = "/images/End.gif" width = "400">
 </p>

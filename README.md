@@ -20,10 +20,10 @@ It was made by me and my four great classmates - Jin, Tony, TL, Jiaqiang.
 <p align = "left"> <img src = "/images/End.gif" width = "400"> </p>
 
 #### Gravity Apply
-The gravity apply in gameplay is learning from
-[oliverholmberg](https://gist.github.com/oliverholmberg/de738361a07246991b56)
-I learn from his Newton gravity formula algorithm and modified to adopt to my game environment
+The gravity system applied in game was learning from 
+[oliverholmberg](https://gist.github.com/oliverholmberg/de738361a07246991b56). 
+I learned from his algorithm and modified to made it adopt to my game environment.
 
-The bgms of the game are made by [Jin's](https://roshinichi.itch.io/) friend [WENGU HU](http://dgspitzer.my-style.in/gameportfolio/). He is a great artist.
+Bgms are made by [Jin's](https://roshinichi.itch.io/)(Jin is a great BILIBILIer) friend [WENGU HU](http://dgspitzer.my-style.in/gameportfolio/). He is a great artist.
 
-Here is my itch.io [Weipeng Ma](https://victor-ma.itch.io/dig)
+My itch.io [Weipeng Ma](https://victor-ma.itch.io/dig)
